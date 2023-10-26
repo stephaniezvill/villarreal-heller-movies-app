@@ -12,19 +12,6 @@ export async function getAllMovies() {
     }
 }
 
-// export async function getMovie(id) {
-//     try {
-//         movies = await getAllMovies();
-//         for (let movie of movies) {
-//             if (movie.id === id) {
-//                 return movie;
-//             }
-//         }
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
 export async function addMovie(movie) {
     try {
         const options = {

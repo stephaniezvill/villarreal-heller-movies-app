@@ -1,0 +1,7 @@
+#addCardFormWrapper {
+    display: none;
+}
+
+.card {
+    width: 30%;
+}

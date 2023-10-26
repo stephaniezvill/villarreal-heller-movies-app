@@ -16,6 +16,7 @@
 
 // console.log(movie);
 
+<<<<<<< HEAD
 const editButtons = document.querySelectorAll("button.edit");
 
 const addCardButton = document.querySelector("header button");
@@ -117,3 +118,29 @@ removeButtons.forEach(removeButton => {
 //         });
 //     }
 // }
+=======
+async function main() {
+
+    // let newMovie = {
+    //     "title": "Future Movie",
+    //     "director": "Some Guy",
+    //     "released": 2121,
+    //     "rating": 3,
+    //     "genre": "Horror",
+    //     "movieSummary": "New Summary",
+    // }
+    // newMovie = await api.addMovie(newMovie);
+    // newMovie.genre = "Something else";
+    // newMovie = await api.editMovie(newMovie);
+    // let deletedMovie = await api.deleteMovie(12)
+//     let movies = await api.getAllMovies();
+// try {
+//     console.log(newMovie);
+//     console.log(movies);
+// } catch (error) {
+//     console.error(error);
+// }
+}
+
+main();
+>>>>>>> 2d8383b22f5a2d69d4f32986f5fc048abcccb8d9

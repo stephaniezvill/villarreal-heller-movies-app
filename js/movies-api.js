@@ -1,19 +1,28 @@
 "use strict";
 
 let movies = [];
+const MOVIE_HOST = "http://localhost:3000";
 
 export async function getAllMovies() {
-    let movies = await fetch("http://localhost:3000/movies")
-        .then(response => response.json());
-    return movies;
+    try {
+        return fetch(`${MOVIE_HOST}/movies`)
+            .then(response => response.json())
+            .then(movies => movies);
+    } catch(error) {
+        console.error (error);
+    }
 }
 
 export async function getMovie(id) {
-    movies = getAllMovies();
-    for (let movie of movies) {
-        if (movie.id === id) {
-            return movie;
+    try {
+        movies = await getAllMovies();
+        for (let movie of movies) {
+            if (movie.id === id) {
+                return movie;
+            }
         }
+    } catch (error) {
+        console.error(error);
     }
 }
 

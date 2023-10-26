@@ -4,6 +4,14 @@ import * as api from "./movies-api.js";
 
 let movie;
 
-movie = api.getMovie(2);
+async function main() {
 
-console.log(movie);
+    let movies = await api.getAllMovies();
+    // movie = api.getMovie(3);
+
+    console.log(movies);
+}
+
+main();
+
+// console.log(movie);

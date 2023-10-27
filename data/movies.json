@@ -2,13 +2,13 @@
   "movies": [
     {
       "title": "Dawn of the Dead",
-      "rating": "5",
-      "movieSummary": "During an escalating zombie epidemic, two Philadelphia SWAT team members, a traffic reporter and his TV executive girlfriend seek refuge in a secluded shopping mall.",
+      "rating": "3",
+      "movieSummary": "New description ",
       "id": 4
     },
     {
       "title": "Fletch",
-      "rating": "2",
+      "rating": "3",
       "movieSummary": "Irwin M. \"Fletch\" Fletcher is a newspaper reporter being offered a large sum to off a cancerous millionaire, but is on the run, risking his job and finding clues when it's clear the man is healthy.",
       "id": 5
     },
@@ -52,9 +52,9 @@
     },
     {
       "title": "Misery",
-      "rating": "5",
-      "movieSummary": "Misery description",
-      "id": 12
+      "rating": "2",
+      "movieSummary": "Sad-sounding movie",
+      "id": 15
     }
   ]
 }

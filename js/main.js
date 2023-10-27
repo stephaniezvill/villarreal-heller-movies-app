@@ -1,7 +1,6 @@
 import * as api from "./movies-api.js";
 
 "use strict";
-
 let movies = [];
 let movie;
 let movieCard, movieCardBody, title, rating, summary, footer, buttonDiv, editButton, deleteButton;
@@ -25,7 +24,7 @@ async function main() {
         let ratingField = document.getElementById("rating");
         let descField = document.getElementById("description");
 
-        movie = {
+         movie = {
             title: titleField.value,
             rating: ratingField.value,
             movieSummary: descField.value
@@ -34,6 +33,7 @@ async function main() {
         let newMovie = await api.addMovie(movie)
         await updateDisplay();
     });
+
 
     await updateDisplay();
 }
@@ -82,11 +82,43 @@ async function updateDisplay() {
         movieCard.appendChild(footer);
         mainContainer.appendChild(movieCard);
 
+        let modal = document.getElementById("editModal");
+        let titleField = document.getElementById("title-field");
+        let ratingField = document.getElementById("rating-field");
+        let descriptionField = document.getElementById("description-field");
+
         deleteButton.addEventListener("click", async function() {
             let badMovie = await api.deleteMovie(movie.id);
             await updateDisplay();
+
+        });
+        editButton.addEventListener("click", async function() {
+            if (modal.style.visibility === 'hidden') {
+                modal.style.visibility = 'visible';
+                modal.style.display = "block";
+            } else {
+                modal.style.visibility = 'hidden';
+                modal.style.display = "none";
+            }
+
+            titleField.value = movie.title;
+            ratingField.value = movie.rating;
+            descriptionField.value = movie.movieSummary;
+        });
+
+        let closeButton = document.getElementById("close");
+            closeButton.addEventListener("click", function (){
+                modal.style.display = "none";
+                modal.style.visibility = "hidden";
+            });
+
+            let saveChanges = document.getElementById("save-changes");
+            saveChanges.addEventListener("click",async function () {
+                let editedMovie = { title:titleField.value, rating:ratingField.value,movieSummary: descriptionField.value, id:movie.id};
+                editedMovie = await api.editMovie(editedMovie);
         });
     }
 }
 
 main();
+

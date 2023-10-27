@@ -31,13 +31,14 @@ export async function addMovie(movie) {
 
 export async function editMovie(movie) {
     try {
+        console.log("editMethod")
         const options = {
             method: "PUT",
             headers: {
                 "Content-type": "application/json"
             },
             body: JSON.stringify(movie)
-        }
+        };
         return fetch (`${MOVIE_HOST}/movies/${movie.id}`, options)
             .then(response => response.json());
     }

@@ -2,10 +2,18 @@ import * as api from "./movies-api.js";
 
 "use strict";
 let movies = [];
-let movie;
+let movie, posterURL, poster;
 let movieCard, movieCardBody, title, rating, summary, footer, buttonDiv, editButton, deleteButton;
 
+const mainContainer = document.getElementById("card-container");
+
 async function main() {
+
+    setTimeout(function() {
+        let spinner = document.querySelector(".loader");
+        spinner.style.visibility = "hidden";
+        spinner.style.display = "none";
+    }, 2000);
 
     document.getElementById('addCardButton').addEventListener('click', function() {
 
@@ -40,16 +48,28 @@ async function main() {
 
 async function updateDisplay() {
 
-    const mainContainer = document.getElementById("card-container");
+    console.log("Called updateDisplay");
 
-    while (mainContainer.firstChild) {
-        mainContainer.removeChild(mainContainer.firstChild);
-    }
+    // while (mainContainer.firstChild) {
+    //     console.log("Removing child");
+    //     mainContainer.removeChild(mainContainer.firstChild);
+    // }
+    mainContainer.innerHTML = "";
 
     movies = await api.getAllMovies();
     for (let movie of movies) {
+
+        // Get poster for each movie
+        await fetch(`http://omdbapi.com/?apikey=${OMDB_KEY}&t=${movie.title}`)
+            .then(response => response.json())
+            .then(data => {
+                posterURL = data.Poster;
+            });
+        poster = document.createElement("img");
+        poster.srcset = posterURL;
+
         movieCard = document.createElement("div");
-        movieCard.classList.add("card", "m-auto");
+        movieCard.classList.add("card", "mx-auto", "my-2");
         movieCardBody = document.createElement("div");
         movieCardBody.classList.add("card-body")
         title = document.createElement("h5");
@@ -75,6 +95,7 @@ async function updateDisplay() {
         buttonDiv.appendChild(editButton);
         buttonDiv.appendChild(deleteButton);
         footer.appendChild(buttonDiv);
+        movieCardBody.appendChild(poster);
         movieCardBody.appendChild(title);
         movieCardBody.appendChild(rating);
         movieCardBody.appendChild(summary);
@@ -104,9 +125,9 @@ async function updateDisplay() {
             titleField.value = movie.title;
             ratingField.value = movie.rating;
             descriptionField.value = movie.movieSummary;
-        });
 
-        let closeButton = document.getElementById("close");
+
+            let closeButton = document.getElementById("close");
             closeButton.addEventListener("click", function (){
                 modal.style.display = "none";
                 modal.style.visibility = "hidden";
@@ -116,6 +137,10 @@ async function updateDisplay() {
             saveChanges.addEventListener("click",async function () {
                 let editedMovie = { title:titleField.value, rating:ratingField.value,movieSummary: descriptionField.value, id:movie.id};
                 editedMovie = await api.editMovie(editedMovie);
+                modal.style.display = "none";
+                modal.style.visibility = "hidden";
+                updateDisplay();
+            });
         });
     }
 }
